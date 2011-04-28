@@ -1,6 +1,8 @@
 from zope.i18nmessageid import MessageFactory
 
+
 MessageFactory = MessageFactory('${namespace_package}.${namespace_package2}.${package}')
+
 
 #if str($zope2product) == 'True'
 def initialize(context):

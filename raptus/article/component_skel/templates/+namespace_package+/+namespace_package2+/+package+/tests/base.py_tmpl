@@ -19,7 +19,7 @@ def setup_product():
 
     ztc.installPackage('raptus.article.core')
     ztc.installPackage('${namespace_package}.${namespace_package2}.${package}')
-    
+
 
 setup_product()
 ptc.setupPloneSite(

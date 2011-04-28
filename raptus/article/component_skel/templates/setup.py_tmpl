@@ -17,8 +17,6 @@ setup(name=${repr($project)},
       version=version,
       description="${description or None}",
       long_description=long_description,
-#      long_description=open("README.txt").read() + "\n" +
-#                       open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?:action=list_classifiers
       classifiers=[
@@ -35,8 +33,9 @@ setup(name=${repr($project)},
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'setuptools',
           'raptus.article.core',
+          'setuptools',
+          'unittest2',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

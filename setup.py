@@ -1,13 +1,17 @@
 from setuptools import setup, find_packages
 import os
 
-version = '0.1.0'
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+version = read('raptus', 'article', 'component_skel', 'version.txt')[:-1]
 
 setup(name='raptus.article.component_skel',
       version=version,
       description="raptus.article component skeleton",
       long_description=open("README.txt").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read() + "\n" +
+                       open(os.path.join("docs", "CONTRIBUTORS.txt")).read() + "\n" +
                        open(os.path.join("docs", "CREDITS.txt")).read(),
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers
@@ -18,18 +22,18 @@ setup(name='raptus.article.component_skel',
       keywords='',
       author='Hexagon IT',
       author_email='oss@hexagonit.fi',
-      url='git',
+      url='',
       license='BSD',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['raptus', 'raptus.article'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[
-          'setuptools',
-          'paste',
-          'pastescript',
           'Cheetah<=2.2.1',
           'ZopeSkel',
+          'paste',
+          'pastescript',
+          'setuptools',
           # -*- Extra requirements: -*-
       ],
       entry_points="""

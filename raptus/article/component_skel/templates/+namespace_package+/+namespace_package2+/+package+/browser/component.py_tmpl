@@ -1,11 +1,10 @@
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from plone.app.layout.viewlets.common import ViewletBase
+from raptus.article.core.interfaces import IArticle, IComponent
 from zope.component import adapts
 from zope.interface import implements, Interface
 
-from plone.app.layout.viewlets.common import ViewletBase
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-
 from ${namespace_package}.${namespace_package2}.${package} import MessageFactory as _
-from raptus.article.core.interfaces import IArticle, IComponent
 
 
 class IMarker(Interface):

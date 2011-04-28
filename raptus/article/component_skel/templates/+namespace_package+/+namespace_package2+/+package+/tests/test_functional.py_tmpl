@@ -1,14 +1,13 @@
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-from doctest import ELLIPSIS, NORMALIZE_WHITESPACE, REPORT_ONLY_FIRST_FAILURE
-from Testing import ZopeTestCase as ztc
 from Products.CMFCore.utils import getToolByName
+from Testing import ZopeTestCase as ztc
+from doctest import ELLIPSIS, NORMALIZE_WHITESPACE, REPORT_ONLY_FIRST_FAILURE
+
 from ${namespace_package}.${namespace_package2}.${package}.tests import base
 
+import unittest2 as unittest
 
 OF = REPORT_ONLY_FIRST_FAILURE | NORMALIZE_WHITESPACE | ELLIPSIS
+
 
 class TestSetup(base.FunctionalTestCase):
 
