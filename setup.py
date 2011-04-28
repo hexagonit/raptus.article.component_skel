@@ -9,7 +9,7 @@ version = read('raptus', 'article', 'component_skel', 'version.txt')[:-1]
 setup(name='raptus.article.component_skel',
       version=version,
       description="raptus.article component skeleton",
-      long_description=open("README.txt").read() + "\n" +
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read() + "\n" +
                        open(os.path.join("docs", "CONTRIBUTORS.txt")).read() + "\n" +
                        open(os.path.join("docs", "CREDITS.txt")).read(),
