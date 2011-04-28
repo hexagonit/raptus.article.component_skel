@@ -1,7 +1,7 @@
-from zope.i18nmessageid import MessageFactory
+from zope.i18nmessageid import MessageFactory as ZopeMessageFactory
 
 
-MessageFactory = MessageFactory('${namespace_package}.${namespace_package2}.${package}')
+MessageFactory = ZopeMessageFactory('${namespace_package}.${namespace_package2}.${package}')
 
 
 #if str($zope2product) == 'True'

@@ -30,9 +30,9 @@ setup(name='raptus.article.component_skel',
       zip_safe=False,
       install_requires=[
           'Cheetah<=2.2.1',
+          'Paste',
+          'PasteScript',
           'ZopeSkel',
-          'paste',
-          'pastescript',
           'setuptools',
           # -*- Extra requirements: -*-
       ],

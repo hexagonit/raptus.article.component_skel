@@ -1,8 +1,10 @@
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone.app.layout.viewlets.common import ViewletBase
-from raptus.article.core.interfaces import IArticle, IComponent
+from raptus.article.core.interfaces import IArticle
+from raptus.article.core.interfaces import IComponent
 from zope.component import adapts
-from zope.interface import implements, Interface
+from zope.interface import Interface
+from zope.interface import implements
 
 from ${namespace_package}.${namespace_package2}.${package} import MessageFactory as _
 
