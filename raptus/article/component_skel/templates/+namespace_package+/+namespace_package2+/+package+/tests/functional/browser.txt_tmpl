@@ -1,0 +1,75 @@
+Initial imports and defines.
+----
+    >>> portal_url =  portal.absolute_url()
+    >>> article = portal.article
+    >>> article_url = article.absolute_url()
+
+Setting up.
+----
+    >>> try:
+    ...     from Testing.testbrowser import Browser
+    ... except ImportError:
+    ...     from Products.Five.testbrowser import Browser
+    >>> browser = Browser()
+
+For debugging.
+----
+    >>> browser.handleErrors = True
+    >>> portal.error_log._ignored_exceptions = ()
+
+Turn off portlets.
+----
+    >>> from zope.component import getUtility, getMultiAdapter
+    >>> from plone.portlets.interfaces import IPortletManager
+    >>> from plone.portlets.interfaces import IPortletAssignmentMapping
+
+    >>> left_column = getUtility(IPortletManager, name=u"plone.leftcolumn")
+    >>> left_assignable = getMultiAdapter((portal, left_column), IPortletAssignmentMapping)
+    >>> for name in left_assignable.keys():
+    ...     del left_assignable[name]
+
+    >>> right_column = getUtility(IPortletManager, name=u"plone.rightcolumn")
+    >>> right_assignable = getMultiAdapter((portal, right_column), IPortletAssignmentMapping)
+    >>> for name in right_assignable.keys():
+    ...     del right_assignable[name]
+
+Log in as the portal owner.
+----
+    >>> try:
+    ...     browser.open(portal_url)
+    ... except:
+    ...     print portal.error_log.getLogEntries()[0]['tb_text']
+    ...     import pdb; pdb.set_trace()
+
+    >>> browser.open(portal_url)
+    >>> from Products.PloneTestCase.setup import portal_owner, default_password
+    >>> browser.open(portal_url + '/login_form?came_from=' + portal_url)
+    >>> browser.getControl(name='__ac_name').value = portal_owner
+    >>> browser.getControl(name='__ac_password').value = default_password
+    >>> browser.getControl(name='submit').click()
+
+Go to article.
+--------------
+    >>> browser.open(article_url)
+
+    >>> try:
+    ...     browser.getLink('Components').click()
+    ... except:
+    ...     print portal.error_log.getLogEntries()[0]['tb_text']
+    ...     import pdb; pdb.set_trace()
+
+    >>> browser.getLink('Components').click()
+    >>> 'value="related"' in browser.contents
+    True
+    >>> 'value="${package}"' in browser.contents
+    True
+    >>> browser.getControl(name="form.components:list").value = ['${package}']
+    >>> browser.getControl(name="form.submitted").click()
+    >>> 'value="${package}" checked="checked"' in browser.contents
+    True
+
+Check View
+----------
+    >>> browser.getLink('View').click()
+    >>> 'id="${namespace_package}.${namespace_package2}.${package}"' in browser.contents
+    True

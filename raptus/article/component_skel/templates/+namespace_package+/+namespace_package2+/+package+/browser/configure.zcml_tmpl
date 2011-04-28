@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:article="http://namespaces.zope.org/article"
+    i18n_domain="${namespace_package}.${namespace_package2}.${package}">
+
+  <include package="raptus.article.core" />
+
+  <article:component
+      name="${package}"
+      component=".component.Component"
+      viewlet="${namespace_package}.${namespace_package2}.${package}.browser.component.ComponentViewlet"
+      manager="plone.app.layout.viewlets.interfaces.IBelowContentBody"
+      />
+
+</configure>

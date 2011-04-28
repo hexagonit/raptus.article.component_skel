@@ -1,0 +1,45 @@
+========================
+plone_app template
+=======================
+
+Use paster::
+
+    >>> paster('create -t raptus_article_component raptus.article.example --no-interactive')
+    paster create -t raptus_article_component raptus.article.example --no-interactive
+    ...
+
+Let's check the content::
+
+    >>> package_dir = os.path.join('raptus.article.example', 
+    ...                            'raptus', 'article', 'example')
+    >>> ls(package_dir)
+    __init__.py
+    browser
+    configure.zcml
+    locales
+    profile
+    tests
+    version.txt
+
+    >>> browser_dir = os.path.join('raptus.article.example', 
+    ...                            'raptus', 'article', 'example', 'browser')
+    >>> ls(browser_dir)
+    __init__.py
+    component.py
+    configure.zcml
+    viewlets
+
+    >>> viewlets_dir = os.path.join('raptus.article.example', 
+    ...                            'raptus', 'article', 'example', 'browser', 'viewlets')
+    >>> ls(viewlets_dir)
+    component.pt
+
+    >>> profile_dir = os.path.join('raptus.article.example', 
+    ...                            'raptus', 'article', 'example', 'profile')
+    >>> ls(profile_dir)
+    default
+
+    >>> profile_default_dir = os.path.join('raptus.article.example', 
+    ...                            'raptus', 'article', 'example', 'profile', 'default')
+    >>> ls(profile_default_dir)
+    metadata.xml

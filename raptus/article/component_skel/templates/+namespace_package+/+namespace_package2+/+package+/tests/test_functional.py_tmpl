@@ -1,0 +1,41 @@
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
+from doctest import ELLIPSIS, NORMALIZE_WHITESPACE, REPORT_ONLY_FIRST_FAILURE
+from Testing import ZopeTestCase as ztc
+from Products.CMFCore.utils import getToolByName
+from ${namespace_package}.${namespace_package2}.${package}.tests import base
+
+
+OF = REPORT_ONLY_FIRST_FAILURE | NORMALIZE_WHITESPACE | ELLIPSIS
+
+class TestSetup(base.FunctionalTestCase):
+
+    def afterSetUp( self ):
+        """After SetUp"""
+        self.setRoles(('Manager',))
+        ## Set up sessioning objects
+        ztc.utils.setupCoreSessions(self.app)
+        wftool = getToolByName(self.portal, 'portal_workflow')
+        self.portal.invokeFactory(
+            'Article',
+            'article',
+        )
+        article = self.portal.article
+        wftool.doActionFor(article, "publish")
+        article.reindexObject()
+
+def test_suite():
+    return unittest.TestSuite([
+
+        ztc.FunctionalDocFileSuite(
+            'tests/functional/browser.txt',
+            package='${namespace_package}.${namespace_package2}.${package}',
+            test_class=TestSetup,
+            optionflags=OF),
+
+            ])
+
+if __name__ == '__main__':
+    unittest.main(defaultTest='test_suite')

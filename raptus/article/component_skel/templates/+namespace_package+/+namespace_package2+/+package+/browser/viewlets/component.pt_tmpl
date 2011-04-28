@@ -1,0 +1,4 @@
+<div id="${namespace_package}.${namespace_package2}.${package}"
+     i18n:domain="${namespace_package}.${namespace_package2}.${package}">
+  Sample Viewlet
+</div>

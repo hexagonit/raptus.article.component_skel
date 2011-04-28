@@ -1,0 +1,36 @@
+from zope.component import adapts
+from zope.interface import implements, Interface
+
+from plone.app.layout.viewlets.common import ViewletBase
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from ${namespace_package}.${namespace_package2}.${package} import MessageFactory as _
+from raptus.article.core.interfaces import IArticle, IComponent
+
+
+class IMarker(Interface):
+    """ Marker interface for the related items viewlet
+    """
+
+
+class Component(object):
+    """ Component which will be shown in Component tab.
+    """
+
+    implements(IComponent)
+    adapts(IArticle)
+
+    title = _("Sample Component")
+    description = _("Description of Sample Component")
+    image = '++resource++sample.gif'
+    interface = IMarker
+    viewlet = '${namespace_package}.${namespace_package2}.${package}'
+
+    def __init__(self, context):
+        self.context = context
+
+
+class ComponentViewlet(ViewletBase):
+    """ Viewlet to be displayed on View.
+    """
+    index = ViewPageTemplateFile('viewlets/component.pt')

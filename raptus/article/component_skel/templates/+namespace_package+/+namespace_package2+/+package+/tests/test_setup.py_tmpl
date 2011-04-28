@@ -1,0 +1,28 @@
+try:
+    import unittest2 as unittest
+except ImportError:
+    import unittest
+from Products.CMFCore.utils import getToolByName
+from ${namespace_package}.${namespace_package2}.${package}.tests.base import TestCase
+
+class TestSetup(TestCase):
+
+    def afterSetUp(self):
+        self.installer = getToolByName(self.portal, 'portal_quickinstaller')
+
+    def test_is_raptus_article_core_installed(self):
+        self.failUnless(self.installer.isProductInstalled('raptus.article.core'))
+
+    def test_is_${namespace_package}_${namespace_package2}_${package}_installed(self):
+        self.failUnless(self.installer.isProductInstalled('${namespace_package}.${namespace_package2}.${package}'))
+
+
+    ## Uninstalling
+    def test_uninstall(self):
+        self.installer.uninstallProducts(['${namespace_package}.${namespace_package2}.${package}'])
+        self.failIf(self.installer.isProductInstalled('${namespace_package}.${namespace_package2}.${package}'))
+
+def test_suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(TestSetup))
+    return suite

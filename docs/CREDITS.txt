@@ -1,0 +1,6 @@
+Credits
+=======
+
+* HexagonIT_
+
+.. _HexagonIT: http://www.hexagonit.fi/
