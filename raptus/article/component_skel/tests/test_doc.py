@@ -5,8 +5,8 @@ Grabs the tests in doctest
 __docformat__ = 'restructuredtext'
 
 
-from zope.testing import doctest
 from zopeskel.tests.test_zopeskeldocs import ZopeSkelLayer
+from zopeskel.tests.test_zopeskeldocs import cat
 from zopeskel.tests.test_zopeskeldocs import ls
 from zopeskel.tests.test_zopeskeldocs import paster
 from zopeskel.tests.test_zopeskeldocs import testSetUp
@@ -14,10 +14,7 @@ from zopeskel.tests.test_zopeskeldocs import testTearDown
 
 import doctest
 import os
-import popen2
-import shutil
 import sys
-import tempfile
 import unittest2 as unittest
 
 
@@ -33,7 +30,12 @@ def doc_suite(test_dir, setUp=testSetUp, tearDown=testTearDown, globs=None):
     """Returns a test suite, based on doctests found in /docs."""
     suite = []
     if globs is None:
-        globs = globals()
+        globs = {
+            'paster': paster,
+            'os': os,
+            'ls': ls,
+            'cat': cat,
+        }
 
     flags = (doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE |
              doctest.REPORT_ONLY_FIRST_FAILURE)
@@ -49,8 +51,8 @@ def doc_suite(test_dir, setUp=testSetUp, tearDown=testTearDown, globs=None):
             os.listdir(doctest_dir) if doc.endswith('.txt')]
 
     for test in docs:
-        suite.append(doctest.DocFileSuite(test, optionflags=flags, 
-                                          globs=globs, setUp=setUp, 
+        suite.append(doctest.DocFileSuite(test, optionflags=flags,
+                                          globs=globs, setUp=setUp,
                                           tearDown=tearDown,
                                           module_relative=False))
 
@@ -66,4 +68,3 @@ def test_suite():
 
 if __name__ == '__main__':
     unittest.main(defaultTest='test_suite')
-
